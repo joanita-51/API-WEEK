@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    async function getStackExchangeUsers() {
+        const apiUrl = "https://api.stackexchange.com/2.3/users?order=desc&sort=reputation&site=stackoverflow";
+
+        // Make the API call
+        const response = await fetch(apiUrl);
+
+        // Parse the response into JavaScript objects
+        const data = await response.json();
+        const usersResponse = data.items.map(item => ({
+            accountId: item.account_id,
+            displayName: item.display_name,
+            profileImage: item.profile_image,
+            reputation: item.reputation
+        }));
+
+        // Output the first user's display name and reputation
+        const firstUser = usersResponse[0];
+        document.getElementById('userName').textContent = firstUser.displayName;
+        document.getElementById('userRep').textContent = firstUser.reputation;
+        document.getElementById('userAccount').textContent = firstUser.accountId;
+        document.getElementById('userprof').textContent = firstUser.profileImage;
+        console.log(`User: ${firstUser.displayName}, Reputation: ${firstUser.reputation}, Account: ${firstUser.accountId}, ProfileImage: ${firstUser.profileImage}`);
+
+        //Output the second user's display name 
+        const secondUser = usersResponse[1];
+        document.getElementById('userName2').textContent = secondUser.displayName;
+        document.getElementById('userRep2').textContent = secondUser.reputation;
+        console.log(`User:${secondUser.display}`)
+    }
+
+    getStackExchangeUsers();
+
+</script>
+
+<p>User: <span id="userName"></span></p> 
+<p>Reputation: <span id="userRep"></span></p>
+<p>UserAccount: <span id="userAccount"></span></p>
+<p>UserProfile: <img src="" alt="" id="userprof"/></p>
+</body>
+</html>
