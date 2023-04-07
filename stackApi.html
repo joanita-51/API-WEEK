@@ -23,7 +23,7 @@
             reputation: item.reputation
         }));
 
-        // Output the first user's display name and reputation
+        // Output the first user's details
         const firstUser = usersResponse[0];
         document.getElementById('userName').textContent = firstUser.displayName;
         document.getElementById('userRep').textContent = firstUser.reputation;
@@ -35,10 +35,12 @@
     getStackExchangeUsers();
 
 </script>
+<div>
+    <p>User: <span id="userName"></span></p> 
+    <p>Reputation: <span id="userRep"></span></p>
+    <p>UserAccount: <span id="userAccount"></span></p>
+    <p>UserProfile: <img src="" alt="" id="userprof"/></p>
+</div>
 
-<p>User: <span id="userName"></span></p> 
-<p>Reputation: <span id="userRep"></span></p>
-<p>UserAccount: <span id="userAccount"></span></p>
-<p>UserProfile: <img src="" alt="" id="userprof"/></p>
 </body>
 </html>
