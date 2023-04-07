@@ -30,12 +30,6 @@
         document.getElementById('userAccount').textContent = firstUser.accountId;
         document.getElementById('userprof').textContent = firstUser.profileImage;
         console.log(`User: ${firstUser.displayName}, Reputation: ${firstUser.reputation}, Account: ${firstUser.accountId}, ProfileImage: ${firstUser.profileImage}`);
-
-        //Output the second user's display name 
-        const secondUser = usersResponse[1];
-        document.getElementById('userName2').textContent = secondUser.displayName;
-        document.getElementById('userRep2').textContent = secondUser.reputation;
-        console.log(`User:${secondUser.display}`)
     }
 
     getStackExchangeUsers();
