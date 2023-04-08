@@ -28,7 +28,7 @@
         document.getElementById('userName').textContent = firstUser.displayName;
         document.getElementById('userRep').textContent = firstUser.reputation;
         document.getElementById('userAccount').textContent = firstUser.accountId;
-        document.getElementById('userprof').textContent = firstUser.profileImage;
+        document.getElementById('userprof').setAttribute('src', firstUser.profileImage);
         console.log(`User: ${firstUser.displayName}, Reputation: ${firstUser.reputation}, Account: ${firstUser.accountId}, ProfileImage: ${firstUser.profileImage}`);
     }
 
