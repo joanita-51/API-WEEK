@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
+import {Card,ListGroup,Container,Row,Col} from 'react-bootstrap';
+
 const Users = () => {
     const [users, setUsers]= useState([]);
 
@@ -25,7 +25,15 @@ const Users = () => {
     console.log(users)
   return (
     <div>
-        {users.items.map((item,index) =>(
+      <header className='bg-secondary text-white text-center py-5'>
+        <h1>Welcome to the Users App</h1>
+        <p className='lead text-warning'>View information about top users on Stack Overflow</p>
+      </header>
+      <Container className='my-5'>
+      <Row xs={1} sm={2} md={4} className='g-4'>
+        {users.length > 0 ? (
+            users.map((item,index) =>(
+            <Col key={index} className='mx-4'>
             <Card style={{ width: '18rem' }} key={index}>
                 <Card.Img variant="top" src={item.profile_image}/>
                 <Card.Body>
@@ -43,8 +51,11 @@ const Users = () => {
                     <Card.Link href={item.link}>Link</Card.Link>
                 </Card.Body>
             </Card>
-        ))}
-
+            </Col>
+            ))
+        ):(<p>Loading ...</p>)}
+        </Row>
+        </Container>
     </div>
 
   )
