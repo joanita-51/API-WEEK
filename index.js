@@ -20,13 +20,23 @@ app.get("/job/jobqueryparams",(req,res)=>{
   }
 
 })
+app.post("/job/jobqueryparams",(req,res)=>{
+  const {id, location} =req.body;
+  const response = jobData.filter((myJob)=>myJob.location === location);
+  if(response){
+    res.status(200).send(response);
+  }else{
+    res.status(404).send("No data found!")
+  }
+
+})
 app.get("/job/:id",(req, res)=>{
   const id = parseInt(req.params.id)
   const response = jobData[id]
   if(response){
     res.status(200).send(response);
   }else{
-    res.status(400).send("No matching id found")
+    res.status(404).send("No matching id found")
   }
 
 })
