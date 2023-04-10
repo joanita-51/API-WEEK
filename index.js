@@ -9,7 +9,17 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+app.get("/job/jobqueryparams",(req,res)=>{
+  const id = parseInt(req.query.id);
+  const location = req.query.location;
+  const response = jobData.find((myJob)=>myJob.id === id && myJob.location === location);
+  if(response){
+    res.status(200).send(response);
+  }else{
+    res.status(400).send("No data found!")
+  }
 
+})
 app.get("/job/:id",(req, res)=>{
   const id = parseInt(req.params.id)
   const response = jobData[id]
