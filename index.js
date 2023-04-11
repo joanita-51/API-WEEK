@@ -32,6 +32,14 @@ app.post("/job/jobqueryparams",(req,res)=>{
 })
 app.post("/job/addnew",(req,res)=>{
   const {id, company, jobTitle, postedOn, location} =req.body;
+
+  const isDuplicateId = jobData.some((myJob)=>myJob.id ===id);
+    const isDuplicateTitle = jobData.some((myJob)=>myJob.JobTitle ===jobTitle);
+
+  if(isDuplicateId || isDuplicateTitle){
+    res.status(400).send('Oops! ID or JobTitle already exists');
+    return;
+  }
   const newData = {id, company, jobTitle, postedOn, location} ;
   jobData.push(newData);
 
@@ -55,6 +63,23 @@ app.get("/job/:id",(req, res)=>{
 
 })
 
+app.delete("/job/deletejob/:id",(req, res)=>{
+  const idToDelete = parseInt(req.params.id);
+  const index = jobData.findIndex((myJob)=>myJob.id === idToDelete);
+  if(index == -1){
+    res.status(404).send(`Job with id ${idToDelete} not found`);
+    return;
+  }
+  jobData.splice(index,1)
+
+    fs.writeFile("./jobs.json", JSON.stringify(jobData), (err)=>{
+    if(err){
+      res.status(500).send("Error writing file")
+      return;
+    }
+    res.status(200).send("Deleted data successfully")
+  })
+})
 
 app.get("/job",(req, res)=>{
   res.status(200).send(jobData)
