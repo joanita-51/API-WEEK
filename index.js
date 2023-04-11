@@ -30,6 +30,20 @@ app.post("/job/jobqueryparams",(req,res)=>{
   }
 
 })
+app.post("/job/addnew",(req,res)=>{
+  const {id, company, jobTitle, postedOn, location} =req.body;
+  const newData = {id, company, jobTitle, postedOn, location} ;
+  jobData.push(newData);
+
+  fs.writeFile("./jobs.json", JSON.stringify(jobData), (err)=>{
+    if(err){
+      res.status(500).send("Error writing file")
+      return;
+    }
+    res.status(200).send("Data added successfully")
+  })
+
+})
 app.get("/job/:id",(req, res)=>{
   const id = parseInt(req.params.id)
   const response = jobData[id]
